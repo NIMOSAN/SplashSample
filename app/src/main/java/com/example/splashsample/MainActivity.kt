@@ -1,10 +1,14 @@
 package com.example.splashsample
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.MotionEventCompat
+import androidx.core.view.accessibility.AccessibilityEventCompat.getAction
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,5 +27,16 @@ class MainActivity : AppCompatActivity() {
         text.repeatMode = Animation.REVERSE
         text.repeatCount = Animation.INFINITE
         textView.startAnimation(text)
+    }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+
+        when (event.action) {
+            MotionEvent.ACTION_DOWN -> {
+                val intent = Intent(this, HomeActivity::class.java)
+                startActivity(intent)
+            }
+        }
+        return true
     }
 }
